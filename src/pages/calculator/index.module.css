@@ -1,0 +1,14 @@
+.calculatorSection {
+    display: grid;
+    justify-content: center;
+    justify-items: center;
+}
+
+.debtFormContainer {
+    color: black;
+    background-color: #fff;
+    border-radius: 5px;
+    padding: 1rem;
+    width: max-content;
+    height: 275px;
+}

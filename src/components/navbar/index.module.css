@@ -1,0 +1,33 @@
+.navbar {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  align-items: center;
+  padding: 1rem;
+  white-space: nowrap;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.navbar h1 {
+  grid-column: 1 / 2;
+  justify-self: start;
+}
+
+.navbar a {
+  text-decoration: none;
+  justify-self: center;
+  color: #fff;
+}
+
+.navbar a:nth-child(2) {
+  grid-column: 2 / 3;
+}
+
+.navbar a:nth-child(3) {
+  grid-column: 3 / 4;
+}
+
+.navbar a:nth-child(4) {
+  grid-column: 4 / 5;
+}

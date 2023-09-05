@@ -1,0 +1,59 @@
+.debtForm {
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  grid-template-columns: 0.5fr 1fr;
+  grid-template-rows: repeat(6, 1fr);
+  grid-template-areas:
+    "labelBalance inputBalance"
+    "labelInterest inputInterest"
+    "labelMinimum inputMinimum"
+    "labelFlat labelFlat"
+    "labelExtra inputExtra"
+    "buttonSubmit buttonSubmit";
+  height: 100%;
+  row-gap: 10px;
+}
+
+.labelBalance {
+  grid-area: labelBalance;
+}
+
+.inputBalance {
+  grid-area: inputBalance;
+}
+
+.labelInterest {
+  grid-area: labelInterest;
+}
+
+.inputInterest {
+  grid-area: inputInterest;
+}
+
+.labelMinimum {
+  grid-area: labelMinimum;
+}
+
+.inputMinimum {
+  grid-area: inputMinimum;
+}
+
+.labelFlat {
+  grid-area: labelFlat;
+  grid-column: span 2;
+}
+
+.labelExtra {
+  grid-area: labelExtra;
+}
+
+.inputExtra {
+  grid-area: inputExtra;
+}
+
+.buttonSubmit {
+  grid-area: buttonSubmit;
+  grid-column: span 2;
+  justify-self: center;
+}
