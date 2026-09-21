@@ -28,22 +28,43 @@ const CalculatorPage = () => {
   const [paymentSchedule, setPaymentSchedule] = useState<PaymentScheduleItem[]>(
     []
   );
+  const [error, setError] = useState<string | null>(null);
 
   const handleSubmit = async (data: DebtFormData) => {
-    const response = await fetch("http://localhost:3050/api/calculate", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    });
+    setError(null);
 
-    if (response.ok) {
+    try {
+      const apiUrl = (
+        process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:3050"
+      ).replace(/\/$/, "");
+      const response = await fetch(`${apiUrl}/api/calculate`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+        signal: AbortSignal.timeout(10_000),
+      });
+
+      if (!response.ok) {
+        const result = (await response.json().catch(() => null)) as {
+          error?: string;
+        } | null;
+        throw new Error(result?.error ?? "The calculation request failed");
+      }
+
       const result: ApiResponse = await response.json();
-      console.log(JSON.stringify(result), "this is the result");
 
       setPaymentInfo(result.paymentInformation);
       setPaymentSchedule(result.paymentSchedule);
+    } catch (requestError) {
+      setPaymentInfo(null);
+      setPaymentSchedule([]);
+      setError(
+        requestError instanceof Error
+          ? requestError.message
+          : "The calculation request failed"
+      );
     }
   };
 
@@ -53,6 +74,7 @@ const CalculatorPage = () => {
       <div className={styles.debtFormContainer}>
         <DebtForm onSubmit={handleSubmit} />
       </div>
+      {error && <p role="alert">{error}</p>}
       {/* Display Payment Information */}
       {paymentInfo && (
         <div>

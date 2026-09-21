@@ -43,7 +43,12 @@ const DebtForm: FC<DebtFormProps> = ({ onSubmit }) => {
       </label>
       <input
         className={styles.inputBalance}
-        type="text"
+        type="number"
+        min="0.01"
+        max="100000000"
+        step="0.01"
+        required
+        inputMode="decimal"
         name="balance"
         placeholder="Balance"
         value={formData.balance}
@@ -57,7 +62,12 @@ const DebtForm: FC<DebtFormProps> = ({ onSubmit }) => {
       </label>
       <input
         className={styles.inputInterest}
-        type="text"
+        type="number"
+        min="0"
+        max="100"
+        step="0.01"
+        required
+        inputMode="decimal"
         name="interestRate"
         placeholder="Interest Rate"
         value={formData.interestRate}
@@ -72,7 +82,12 @@ const DebtForm: FC<DebtFormProps> = ({ onSubmit }) => {
       {formData.flatMinimumPayment === true ? (
         <input
           className={styles.inputMinimum}
-          type="text"
+          type="number"
+          min="0.01"
+          max="100000000"
+          step="0.01"
+          required
+          inputMode="decimal"
           name="minimumPayment"
           placeholder="Minimum Payment"
           value={formData.minimumPayment}
@@ -83,7 +98,7 @@ const DebtForm: FC<DebtFormProps> = ({ onSubmit }) => {
       ) : (
         <input
           className={styles.inputMinimum}
-          type="text"
+          type="number"
           name="minimumPayment"
           placeholder="Minimum Payment"
           value={Math.max(25, formData.balance * 0.02)}
@@ -114,7 +129,12 @@ const DebtForm: FC<DebtFormProps> = ({ onSubmit }) => {
       </label>
       <input
         className={styles.inputExtra}
-        type="text"
+        type="number"
+        min="0"
+        max="100000000"
+        step="0.01"
+        required
+        inputMode="decimal"
         name="extraPayment"
         placeholder="Extra Payment"
         value={formData.extraPayment}
